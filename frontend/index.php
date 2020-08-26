@@ -162,6 +162,10 @@ isset($_SESSION['login_customer']) ? redirect('?page=film') : false;
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
                             </div>
+
+                            <div id="metodepembayaran">
+
+                            </div>
                             <button class="float-right mb-2 btn btn-link btn-login" type="button">Have account?</button>
                             <button class="btn btn-block btn-primary" type="submit">Create Account</button>
                         </div>
@@ -213,6 +217,15 @@ isset($_SESSION['login_customer']) ? redirect('?page=film') : false;
                     icon: type
                 })
             }
+
+            $("input[name='cek_member']").on('change', function() {
+                var value = $(this).val()
+                if (value == 'member') {
+                    $("#metodepembayaran").append('<div class="form-group"><label>Metode Pembayaran</label><div class="text-center"><label class="mt-2"><img src="frontend/assets/img/ovo.png" alt="OVO" width="80px"><input style="display:block; margin: auto;" type="radio" name="pembayaran" value="OVO" required /></label><label class="mt-2 ml-5"><img src="frontend/assets/img/gopay.png" alt="GOPAY" width="100px"><input style="display:block; margin: auto;margin-top: 7px" type="radio" name="pembayaran" value="GOPAY" required /></label></div></div>')
+                } else {
+                    $("#metodepembayaran .form-group").remove()
+                }
+            })
 
             // setTimeout(function() {
             //     $(".btn-register").click();

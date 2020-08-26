@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'login_customer' => true,
                 'email_customer' => $email,
                 'id_customer' => $getdata['id_customer'],
+                'nama_customer' => $getdata['nama'],
                 'status' => $getdata['status']
             ];
 

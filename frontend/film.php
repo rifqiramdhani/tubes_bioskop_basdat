@@ -6,7 +6,7 @@ isset($_SESSION['login_customer']) ? false : redirect('index.php');
 
 
 <?php
-$query = mysqli_query($koneksi, "SELECT * FROM film ORDER BY id_film ASC")
+$query = mysqli_query($koneksi, "SELECT * FROM film ORDER BY id_film ASC");
 // var_dump($_SESSION);
 ?>
 <!-- show sweet alert -->

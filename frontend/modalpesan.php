@@ -45,16 +45,18 @@
                         </div>
                     </div>
 
-                    <div class="form-group has-feedback">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="nama" data-required-error="Data tidak boleh kosong" required>
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                        <span class="help-block with-errors"></span>
-                    </div>
+
 
 
 
                     <?php if (empty($_SESSION['login_customer'])) : ?>
+                        <div class="form-group has-feedback">
+                            <label>Nama</label>
+                            <input type="text" class="form-control" name="nama" data-required-error="Data tidak boleh kosong" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span class="help-block with-errors"></span>
+                        </div>
+
                         <div class="form-group has-feedback">
                             <label>Email</label>
                             <input type="email" class="form-control" name="email" data-required-error="Data tidak boleh kosong" required>
@@ -62,6 +64,13 @@
                             <span class="help-block with-errors"></span>
                         </div>
                     <?php else : ?>
+                        <div class="form-group has-feedback">
+                            <label>Nama</label>
+                            <input type="text" class="form-control" name="nama" value="<?= $_SESSION['nama_customer'] ?>" data-required-error="Data tidak boleh kosong" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            <span class="help-block with-errors"></span>
+                        </div>
+
                         <div class="form-group has-feedback">
                             <label>Email</label>
                             <input type="email" class="form-control" name="email" data-required-error="Data tidak boleh kosong" value="<?= $_SESSION['email_customer'] ?>" required readonly>

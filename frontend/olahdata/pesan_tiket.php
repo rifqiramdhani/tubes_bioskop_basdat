@@ -20,9 +20,9 @@ configsmtp($mail);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $id_dt_jadwal = htmlspecialchars(ucwords($_POST['id_jadwal']));
-    $id_film = htmlspecialchars(ucwords($_POST['id_film']));
-    $pembayaran = htmlspecialchars(ucwords($_POST['pembayaran']));
+    $id_dt_jadwal = htmlspecialchars($_POST['id_jadwal']);
+    $id_film = htmlspecialchars($_POST['id_film']);
+    $pembayaran = htmlspecialchars($_POST['pembayaran']);
     $kursi = ($_POST['kursi']);
     $jumlah = ($_POST['jumlah']);
     $harga_tiket = 35000;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $queryTiket = mysqli_query($koneksi, "SELECT * FROM tiket ORDER BY id_customer DESC LIMIT 1");
             $getTiket = mysqli_fetch_assoc($queryTiket);
 
-            $queryJadwal = mysqli_query($koneksi, "SELECT judul, nama_studio, jam_tayang FROM `tubes_bioskop`.`detail_jadwal` JOIN film USING(id_film) JOIN studio USING(id_studio) JOIN jadwal USING(id_jadwal)");
+            $queryJadwal = mysqli_query($koneksi, "SELECT judul, nama_studio, jam_tayang FROM `detail_jadwal` JOIN film USING(id_film) JOIN studio USING(id_studio) JOIN jadwal USING(id_jadwal) WHERE id_dt_jadwal = '$id_dt_jadwal'");
             $getJadwal = mysqli_fetch_assoc($queryJadwal);
 
             $mail->addAddress($email);
@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Studio      : ' . $getJadwal['nama_studio'] . '</p>
             <p>No Kursi      : ' . $no_kursi . '</p>
             <p>Jam Tayang  : ' . $getJadwal['jam_tayang'] . ' WIB</p>
-            <p>Harga Tiket : '. $harga_tiket.'</p>
-            <p>Total Bayar : '. $total_harga_tiket .'</p>
+            <p>Harga Tiket : '. rupiah($harga_tiket).'</p>
+            <p>Total Bayar : '. rupiah($total_harga_tiket) .'</p>
             ';
             $mail->Body = $mailContent;
 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = mysqli_query($koneksi, "INSERT INTO `tiket`(`id_customer`, `id_dt_jadwal`, `no_kursi`, `jumlah`, `harga_tiket`, `total_harga_tiket`, `tanggal`, `metode_pembayaran`) VALUES ('$id_customer', '$id_dt_jadwal', '$no_kursi', '$jumlah', '$harga_tiket', '$final_total_harga', '$tanggal', '$pembayaran')");
 
         if ($sql) {
-            $_SESSION['message'] = 'Transaksi berhasil dilakukan, silahkan ke menu tiket untuk mencetak tiket.';
+            $_SESSION['message'] = 'Transaksi berhasil dilakukan, perlihatkan tiket pada menu tiket ke kasir';
             $_SESSION['title'] = 'Data Transaksi';
             $_SESSION['type'] = 'success';
             echo 'berhasil';
