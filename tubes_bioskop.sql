@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2020 at 03:07 AM
+-- Generation Time: Aug 26, 2020 at 06:37 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -65,7 +65,8 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id_customer`, `email`, `password`, `nama`, `no_telepon`, `status`) VALUES
 (15, 'rifqiramdhani8@gmail.com', '$2y$10$bY11PhcFtfddJ1OFgoA5t.50XosKoXEtwmU0TTL0V3xwXYwWruHQe', 'Rifqi Ramdhani', '081393003129', 'member'),
-(16, 'ruyatsy@gmail.com', '$2y$10$HsJ9RDATE9Rgm2QRZSX96uMBYgmd0Z3/MIBf6sdlSEGCMwmnwcy3u', 'Ruyatsyah', '08229928837718', 'nonmember');
+(16, 'ruyatsy@gmail.com', '$2y$10$HsJ9RDATE9Rgm2QRZSX96uMBYgmd0Z3/MIBf6sdlSEGCMwmnwcy3u', 'Ruyatsyah', '08229928837718', 'nonmember'),
+(17, 'ramdhanirifqi8@gmail.com', '$2y$10$Qik3d3wqOXth7udbL3Zz/ufHkkWsCprETL7XzjQx.eOVYQzhovW0C', 'Ahmad Saepulrohman', '089273662516', 'nonmember');
 
 -- --------------------------------------------------------
 
@@ -197,17 +198,30 @@ CREATE TABLE `struk` (
   `total_harga` int(7) NOT NULL,
   `qty` int(3) NOT NULL,
   `metode_pembayaran` varchar(5) NOT NULL,
-  `tanggal` datetime NOT NULL
+  `tanggal` datetime NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `struk`
 --
 
-INSERT INTO `struk` (`id_struk`, `id_paket_makanan`, `id_customer`, `nama`, `email`, `total_harga`, `qty`, `metode_pembayaran`, `tanggal`) VALUES
-(1, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:16:35'),
-(2, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:16:57'),
-(3, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:20:32');
+INSERT INTO `struk` (`id_struk`, `id_paket_makanan`, `id_customer`, `nama`, `email`, `total_harga`, `qty`, `metode_pembayaran`, `tanggal`, `status`) VALUES
+(1, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:16:35', 1),
+(2, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:16:57', 0),
+(3, 2, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 50000, 1, 'GOPAY', '2020-08-01 08:20:32', 0),
+(4, 3, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 60000, 1, 'OVO', '2020-08-26 06:11:57', 0),
+(5, 2, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 150000, 3, 'OVO', '2020-08-26 06:12:39', 0),
+(6, 1, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 200000, 2, 'GOPAY', '2020-08-26 06:13:17', 0),
+(7, 3, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 60000, 1, 'GOPAY', '2020-08-26 06:14:18', 0),
+(8, 3, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 60000, 1, 'GOPAY', '2020-08-26 06:14:34', 0),
+(9, 3, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 60000, 1, 'GOPAY', '2020-08-26 06:15:32', 0),
+(10, 1, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 100000, 1, 'GOPAY', '2020-08-26 06:16:12', 0),
+(11, 3, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 120000, 2, 'GOPAY', '2020-08-26 06:16:46', 0),
+(12, 2, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 50000, 1, 'GOPAY', '2020-08-26 06:17:50', 0),
+(13, 1, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 200000, 2, 'GOPAY', '2020-08-26 06:18:59', 0),
+(14, 2, NULL, 'Ahmad Saepulrohman', 'Ramdhanirifqi8@gmail.com', 50000, 1, 'GOPAY', '2020-08-26 06:21:11', 0),
+(15, 3, NULL, 'Rifqi Ramdhani', 'Rifqiramdhani8@gmail.com', 9000, 1, 'GOPAY', '2020-08-26 06:21:32', 0);
 
 -- --------------------------------------------------------
 
@@ -243,8 +257,19 @@ CREATE TABLE `tiket` (
   `harga_tiket` int(5) NOT NULL,
   `total_harga_tiket` int(6) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `metode_pembayaran` varchar(5) NOT NULL
+  `metode_pembayaran` varchar(5) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tiket`
+--
+
+INSERT INTO `tiket` (`id_tiket`, `id_customer`, `id_dt_jadwal`, `no_kursi`, `jumlah`, `harga_tiket`, `total_harga_tiket`, `tanggal`, `metode_pembayaran`, `status`) VALUES
+(1, 17, 3, 'J001, I002, H002', 3, 35000, 105000, '2020-08-26 06:01:38', 'OVO', 1),
+(2, 17, 1, 'H002, G003, F003', 3, 35000, 105000, '2020-08-26 06:04:20', 'OVO', 0),
+(3, 17, 2, 'I002, H003', 2, 35000, 70000, '2020-08-26 06:07:16', 'GOPAY', 0),
+(4, 15, 1, 'H002, G002', 2, 35000, 70000, '2020-08-26 06:22:24', 'OVO', 0);
 
 --
 -- Indexes for dumped tables
@@ -328,7 +353,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `detail_jadwal`
@@ -358,7 +383,7 @@ ALTER TABLE `paket_makanan`
 -- AUTO_INCREMENT for table `struk`
 --
 ALTER TABLE `struk`
-  MODIFY `id_struk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_struk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `studio`
@@ -370,7 +395,7 @@ ALTER TABLE `studio`
 -- AUTO_INCREMENT for table `tiket`
 --
 ALTER TABLE `tiket`
-  MODIFY `id_tiket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_tiket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
