@@ -1,5 +1,5 @@
 <?php
-$query = mysqli_query($koneksi, "SELECT customer.*, admin.nama as nama_admin FROM `customer` JOIN admin USING(id_admin)");
+$query = mysqli_query($koneksi, "SELECT customer.*FROM `customer`");
 ?>
 
 <!-- <div class="flash-data" data-flashdata=""></div> -->
@@ -13,7 +13,7 @@ $query = mysqli_query($koneksi, "SELECT customer.*, admin.nama as nama_admin FRO
         unset($_SESSION['title']);
         unset($_SESSION['type']);
     endif;
-    ?> 
+    ?>
 
     <div class="card card-accent-success">
         <div class="card-header"><strong>Data Customer</strong></div>
@@ -25,12 +25,8 @@ $query = mysqli_query($koneksi, "SELECT customer.*, admin.nama as nama_admin FRO
                             <th>#</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Jenis Kelamin</th>
                             <th>No Telepon</th>
-                            <th>Tempat, Tanggal Lahir</th>
-                            <th>Alamat</th>
-                            <th>Nama Admin</th>
-                            <!-- <th></th> -->
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,11 +36,8 @@ $query = mysqli_query($koneksi, "SELECT customer.*, admin.nama as nama_admin FRO
                                 <td><?= $i++ ?></td>
                                 <td><?= $getdata['nama'] ?></td>
                                 <td><?= $getdata['email'] ?></td>
-                                <td><?= $getdata['jenis_kelamin'] ?></td>
                                 <td><?= $getdata['no_telepon'] ?></td>
-                                <td><?= $getdata['tempat_tanggal_lahir'] ?></td>
-                                <td><?= $getdata['alamat'] ?></td>
-                                <td><?= $getdata['nama_admin'] ?></td>
+                                <td><?= ucfirst($getdata['status']) ?></td>
                                 <!-- <td>
                                     <a href="<?= BASE_URL . 'admin/index.php?page=karyawan&action=editdata&id=' . $getdata['id_customer'] ?>" class="btn btn-sm btn-primary mt-1"><i class="fas fa-edit"></i></a>
                                     <button type="button" data-id="<?= $getdata['id_customer'] ?>" data-nama="<?= $getdata['nama'] ?>" class="btn btn-sm btn-danger remove mt-1"><i class="fas fa-trash"></i></button>
